@@ -1,0 +1,33 @@
+---
+- name: Deploy Flask Application
+  hosts: local
+  vars:
+    app_dir: "{{ ansible_env.HOME }}/devops-app"
+    venv_dir: "{{ ansible_env.HOME }}/devops-app/venv"
+    deployment_dir: "{{ ansible_env.HOME }}/deployment"
+    production_dir: "{{ ansible_env.HOME }}/production"
+    backup_dir: "{{ ansible_env.HOME }}/backup"
+
+  tasks:
+    - name: Create deployment directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ deployment_dir }}"
+        - "{{ production_dir }}"
+        - "{{ backup_dir }}"
+
+    - name: Copy application files to deployment directory
+      copy:
+        src: "{{ app_dir }}/"
+        dest: "{{ deployment_dir }}/"
+        remote_src: yes
+
+    - name: Backup current production (if exists)
+      command: rsync -a {{ production_dir }}/ {{ backup_dir }}/
+      ignore_errors: yes
+
+    - name: Deploy to production
+      command: rsync -a {{ deployment_dir }}/ {{ production_dir }}/
