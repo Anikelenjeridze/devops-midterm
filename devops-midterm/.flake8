@@ -1,0 +1,10 @@
+[flake8]
+exclude = 
+    venv/,
+    .venv/,
+    env/,
+    .env/,
+    ./venv/,
+    ./env/,
+    **/site-packages/**
+max-line-length = 100
