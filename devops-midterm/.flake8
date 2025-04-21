@@ -4,7 +4,6 @@ exclude =
     .venv/,
     env/,
     .env/,
-    ./venv/,
-    ./env/,
-    **/site-packages/**
+    __pycache__/,
+    */site-packages/*
 max-line-length = 100
