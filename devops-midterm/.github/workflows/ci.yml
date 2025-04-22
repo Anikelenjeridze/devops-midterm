@@ -25,12 +25,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt # Installs Flask, pytest, AND flake8 now
+          # === THIS IS THE IMPORTANT CHANGE ===
+          pip install -r requirements.txt # Installs Flask, pytest, AND flake8 from the file
 
       # Step 4: Check code style with flake8
       - name: Lint with flake8
         run: |
-          # We don't need 'pip install flake8' here anymore because it was installed in the previous step
+          # === THIS IS THE IMPORTANT CHANGE ===
+          # We DO NOT 'pip install flake8' here anymore
           flake8 app.py test_app.py --count --select=E9,F63,F7,F82 --show-source --statistics
 
       # Step 5: Run the unit tests
