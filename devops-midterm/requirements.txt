@@ -1,2 +1,4 @@
-Flask==2.0.1
-pytest==6.2.5
+# requirements.txt
+Flask>=2.0  # Use appropriate versions
+pytest>=7.0
+flake8>=5.0
