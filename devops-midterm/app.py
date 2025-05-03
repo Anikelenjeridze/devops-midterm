@@ -7,7 +7,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-
+# scsk;c
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form.get('name', 'Guest')
